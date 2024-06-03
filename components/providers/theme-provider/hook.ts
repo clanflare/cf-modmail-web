@@ -8,6 +8,8 @@ export const useThemeProvider = () => {
 	const loadPreviousTheme = () => {
 		const prevTheme = localStorage.getItem("theme");
 
+		console.log(prevTheme);
+
 		if (!prevTheme || (prevTheme !== "light" && prevTheme !== "dark")) {
 			localStorage.setItem("theme", "light");
 			return;

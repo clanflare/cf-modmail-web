@@ -5,7 +5,7 @@ export default function Home() {
 		<>
 			<MainNavbar />
 			<MainSidebar />
-			<main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+			<main className="flex min-h-screen flex-col items-center justify-between p-24 bg-background dark:bg-dark-background"></main>
 		</>
 	);
 }

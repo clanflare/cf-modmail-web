@@ -2,10 +2,10 @@
 
 import { useMainSidebar } from "./hook";
 import { SolidBtn } from "@/components/elements";
-import { Power } from "lucide-react";
+import { Moon, Power, Sun } from "lucide-react";
 
 const MainSidebar = () => {
-	const { isSidebarOpen } = useMainSidebar();
+	const { isSidebarOpen, theme, toggleTheme } = useMainSidebar();
 
 	return (
 		<>
@@ -14,11 +14,11 @@ const MainSidebar = () => {
 					<div className="w-full flex-1 flex flex-col"></div>
 
 					<SolidBtn
-						title="Logout"
+						title={theme === "light" ? "Dark" : "Light"}
 						className="mb-2"
-						titleClassName="text-destructive dark:text-destructive"
-						LeftIcon={Power}
-						leftIconClassName="text-destructive dark:text-destructive mr-2"
+						LeftIcon={theme === "light" ? Moon : Sun}
+						onClick={() => toggleTheme()}
+						leftIconClassName="mr-2"
 					/>
 
 					<SolidBtn
