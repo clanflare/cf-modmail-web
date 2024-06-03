@@ -1,7 +1,12 @@
 import { useSidebarStateStore } from "@/store";
+import { useEffect } from "react";
 
 export const useMainNavbar = () => {
-	const { toggleSidebarState } = useSidebarStateStore();
+	const { isSidebarOpen, toggleSidebarState } = useSidebarStateStore();
+
+	useEffect(() => {
+		console.log(isSidebarOpen);
+	}, [isSidebarOpen]);
 
 	return {
 		toggleSidebarState,
