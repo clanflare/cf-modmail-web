@@ -1,5 +1,5 @@
 import { SidebarOption } from "@/types/common";
-import { Settings } from "lucide-react";
+import { HomeIcon, Settings } from "lucide-react";
 
 export const MainSidebarOptions: Array<SidebarOption> = [
 	{

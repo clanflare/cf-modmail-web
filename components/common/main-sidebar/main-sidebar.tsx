@@ -1,17 +1,29 @@
 "use client";
 
 import { useMainSidebar } from "./hook";
-import { SolidBtn } from "@/components/elements";
+import { SidebarBtn, SolidBtn } from "@/components/elements";
 import { Moon, Power, Sun } from "lucide-react";
+import { MainSidebarOptions } from "@/constants/siderbar-options";
 
 const MainSidebar = () => {
-	const { isSidebarOpen, theme, toggleTheme } = useMainSidebar();
+	const { isSidebarOpen, theme, toggleTheme, currentPathname } =
+		useMainSidebar();
 
 	return (
 		<>
 			{isSidebarOpen && (
-				<div className="w-64 h-screen fixed top-0 left-0 z-10 bg-card dark:bg-dark-card border-r border-dashed border-foreground/20 dark:border-dark-foreground/20 flex flex-col px-4 py-2">
-					<div className="w-full flex-1 flex flex-col"></div>
+				<div className="w-64 h-screen fixed top-0 left-0 z-10 bg-card dark:bg-dark-card border-r border-dashed border-foreground/20 dark:border-dark-foreground/20 flex flex-col px-4 py-2 pt-14">
+					<div className="w-full flex-1 flex flex-col">
+						{MainSidebarOptions.map((sidebarOption) => (
+							<SidebarBtn
+								key={sidebarOption.id}
+								option={sidebarOption}
+								isSelected={
+									currentPathname === sidebarOption.link
+								}
+							/>
+						))}
+					</div>
 
 					<SolidBtn
 						title={theme === "light" ? "Dark" : "Light"}
