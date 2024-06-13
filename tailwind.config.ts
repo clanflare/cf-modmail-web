@@ -90,6 +90,7 @@ const config = {
 				quicksand: "'Quicksand', sans-serif",
 				manrope: "'Manrope', sans-serif",
 				muli: "'muli', sans-serif",
+				b612: "'B612', sans-serif",
 			},
 		},
 	},
