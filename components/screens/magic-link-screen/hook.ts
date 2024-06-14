@@ -1,5 +1,10 @@
 import { saveAuthToken } from "@/actions";
-import { useAuthTokenStore } from "@/store";
+import {
+	useAppLoadStateStore,
+	useAuthStateStore,
+	useAuthTokenStore,
+} from "@/store";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 interface Args {
@@ -10,7 +15,9 @@ export const useMagicLinkScreen = (args: Args) => {
 	const { token } = args;
 
 	const { setToken } = useAuthTokenStore();
-    // const {} = us
+	const { setIsAuthenticated } = useAuthStateStore();
+	const { isAppLoaded } = useAppLoadStateStore();
+	const router = useRouter();
 
 	const saveToken = async () => {
 		const response = await saveAuthToken({
@@ -19,9 +26,14 @@ export const useMagicLinkScreen = (args: Args) => {
 
 		if (response.authToken) {
 			setToken(response.authToken);
-            
+			setIsAuthenticated(true);
+			router.replace("/");
 		}
 	};
 
-	useEffect(() => {}, [token]);
+	useEffect(() => {
+		if (isAppLoaded && token) {
+			saveToken();
+		}
+	}, [token, isAppLoaded]);
 };
