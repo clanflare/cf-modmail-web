@@ -1,13 +1,27 @@
+import { saveAuthToken } from "@/actions";
+import { useAuthTokenStore } from "@/store";
 import { useEffect } from "react";
 
 interface Args {
-    token: string
+	token: string;
 }
 
-export const useMagicLinkScreen = ( args: Args ) => {
-    const { token } = args;
+export const useMagicLinkScreen = (args: Args) => {
+	const { token } = args;
 
-    useEffect(() => {
+	const { setToken } = useAuthTokenStore();
+    // const {} = us
 
-    }, [token])
-}
+	const saveToken = async () => {
+		const response = await saveAuthToken({
+			token,
+		});
+
+		if (response.authToken) {
+			setToken(response.authToken);
+            
+		}
+	};
+
+	useEffect(() => {}, [token]);
+};
