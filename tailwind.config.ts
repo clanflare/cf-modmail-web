@@ -86,11 +86,10 @@ const config = {
 				default: "0.5rem",
 			},
 			fontFamily: {
-				poppins: "'Poppins', sans-serif",
 				quicksand: "'Quicksand', sans-serif",
-				manrope: "'Manrope', sans-serif",
 				muli: "'muli', sans-serif",
-				b612: "'B612', sans-serif",
+				ewert: "'Ewert', serif;",
+				bahnschrift: "'Bahnschrift'",
 			},
 		},
 	},
