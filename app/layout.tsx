@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { MagicLinkManager } from "@/components/common";
+import { AuthManager } from "@/components/common";
 import { ThemeProvider } from "@/components/providers";
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				<ThemeProvider>
+					<AuthManager />
 					{children}
-					<MagicLinkManager />
 				</ThemeProvider>
 			</body>
 		</html>

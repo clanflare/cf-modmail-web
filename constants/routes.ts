@@ -1,3 +1,3 @@
-export const ProtectedRoutes = new Set(["/"]);
+export const PROTECTED_ROUTES: Set<string> = new Set(["/"]);
 
-export const UnprotectedRoutes = new Set(["/login"]);
+export const UNPROTECTED_ROUTES: Set<string> = new Set(["/login"]);
