@@ -35,7 +35,7 @@ const SolidBtn = (props: Props) => {
 	return (
 		<button
 			className={twMerge(
-				"w-full bg-primary dark:bg-dark-primary hover:bg-primary/90 dark:hover:bg-dark-primary/90 flex items-center justify-center px-4 py-2.5 font-muli text-primary-foreground dark:text-dark-primary-foreground rounded-md",
+				"w-full bg-primary hover:bg-primary/90 flex items-center justify-center px-4 py-2.5 font-muli text-primary-foreground rounded-md",
 				className,
 			)}
 			aria-label={`${title} button`}
@@ -46,7 +46,7 @@ const SolidBtn = (props: Props) => {
 				<LeftIcon
 					size={leftIconSize ?? 22}
 					className={twMerge(
-						"text-primary-foreground dark:text-dark-primary-foreground mr-1",
+						"text-primary-foreground mr-1",
 						leftIconClassName,
 					)}
 				/>
@@ -54,7 +54,7 @@ const SolidBtn = (props: Props) => {
 
 			<p
 				className={twMerge(
-					"text-primary-foreground dark:text-dark-primary-foreground text-base",
+					"text-primary-foreground text-base",
 					titleClassName,
 				)}
 			>
@@ -65,7 +65,7 @@ const SolidBtn = (props: Props) => {
 				<RightIcon
 					size={rightIconSize ?? 22}
 					className={twMerge(
-						"text-primary-foreground dark:text-dark-primary-foreground mr-1",
+						"text-primary-foreground mr-1",
 						rightIconClassName,
 					)}
 				/>

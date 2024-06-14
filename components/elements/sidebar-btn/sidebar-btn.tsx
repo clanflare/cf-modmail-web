@@ -29,9 +29,9 @@ const SidebarBtn = (props: Props) => {
 		<Link href={option.link}>
 			<button
 				className={twMerge(
-					"w-full flex my-0.5 py-2 px-2 items-center text-muted-foreground bg-background dark:text-muted-dark-foreground dark:bg-dark-background hover:bg-accent dark:hover:bg-dark-accent font-muli rounded-default",
+					"w-full flex my-1 py-2 px-2 items-center text-secondary-light hover:text-primary-light font-bahnschrift rounded-default",
 					isSelected
-						? "bg-accent dark:bg-dark-accent text-foreground dark:text-dark-foreground"
+						? "bg-accent-background text-primary-dark hover:text-primary-dark"
 						: "",
 					className,
 				)}
