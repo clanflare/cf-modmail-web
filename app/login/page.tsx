@@ -3,13 +3,13 @@ import LoginHero from "@/assets/images/login/login-hero.png";
 
 const LoginPage = () => {
 	return (
-		<main className="w-full h-screen flex bg-primary-dark font-b612">
+		<main className="w-full h-screen flex bg-accent-background font-b612">
 			<div className="flex-1 h-screen flex flex-col items-center justify-center px-4 py-2">
-				<h1 className="text-4xl font-semibold text-accent-background tracking-wide text-center">
+				<h1 className="text-4xl font-semibold text-primary-dark tracking-wide text-center">
 					MODMAIL BOT
 				</h1>
 
-				<p className="text-lg text-primary-light mt-5 text-center">
+				<p className="text-lg mt-5 text-center text-secondary-dark/80">
 					Login with Discord to get Bot Access
 				</p>
 
