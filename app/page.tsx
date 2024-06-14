@@ -1,11 +1,12 @@
 import { MainNavbar, MainSidebar } from "@/components/common";
+import { ConfigScreen } from "@/components/screens";
 
 export default function Home() {
 	return (
 		<>
 			<MainNavbar />
 			<MainSidebar />
-			<main className="flex min-h-screen flex-col w-full bg-primary-dark"></main>
+			<ConfigScreen />
 		</>
 	);
 }
