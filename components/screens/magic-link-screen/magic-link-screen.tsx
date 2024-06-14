@@ -19,7 +19,7 @@ const MagicLinkScreen = (props: Props) => {
 				size={30}
 			/>
 
-			<p className="text-primary-light">Redirecting...</p>
+			<p className="text-primary-light ml-2 text-lg">Redirecting...</p>
 		</div>
 	);
 };
