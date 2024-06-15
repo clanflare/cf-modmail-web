@@ -4,7 +4,7 @@ import { LucideIcon } from "lucide-react";
 import { IconType } from "react-icons";
 import { twMerge } from "tailwind-merge";
 
-interface Props extends React.ComponentProps<"button"> {
+export interface SolidBtnProps extends React.ComponentProps<"button"> {
 	className?: string;
 	onClick?: (e?: React.MouseEvent<HTMLButtonElement> | undefined) => void;
 	title: string;
@@ -17,7 +17,7 @@ interface Props extends React.ComponentProps<"button"> {
 	rightIconClassName?: string;
 }
 
-const SolidBtn = (props: Props) => {
+const SolidBtn = (props: SolidBtnProps) => {
 	const {
 		className,
 		onClick,
@@ -35,7 +35,7 @@ const SolidBtn = (props: Props) => {
 	return (
 		<button
 			className={twMerge(
-				"w-full bg-primary hover:bg-primary/90 flex items-center justify-center px-4 py-2.5 font-muli text-primary-foreground rounded-md",
+				"w-full bg-accent-background hover:bg-accent-background/90 flex items-center justify-center px-4 py-2.5 font-bahnschrift text-primary-dark rounded-md",
 				className,
 			)}
 			aria-label={`${title} button`}
@@ -46,7 +46,7 @@ const SolidBtn = (props: Props) => {
 				<LeftIcon
 					size={leftIconSize ?? 22}
 					className={twMerge(
-						"text-primary-foreground mr-1",
+						"text-primary-dark mr-1",
 						leftIconClassName,
 					)}
 				/>
@@ -54,7 +54,7 @@ const SolidBtn = (props: Props) => {
 
 			<p
 				className={twMerge(
-					"text-primary-foreground text-base",
+					"text-primary-dark text-base",
 					titleClassName,
 				)}
 			>
@@ -65,7 +65,7 @@ const SolidBtn = (props: Props) => {
 				<RightIcon
 					size={rightIconSize ?? 22}
 					className={twMerge(
-						"text-primary-foreground mr-1",
+						"text-primary-dark mr-1",
 						rightIconClassName,
 					)}
 				/>
