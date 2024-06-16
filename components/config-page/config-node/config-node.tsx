@@ -1,6 +1,6 @@
 "use client";
 
-import { SolidBtn, TextInput } from "@/components/elements";
+import { SolidBtn, TextInput, TextareaInput } from "@/components/elements";
 import { useConfigNode } from "./hook";
 import { Plus, Trash } from "lucide-react";
 import { twMerge } from "tailwind-merge";
@@ -29,6 +29,9 @@ const ConfigNode = (props: Props) => {
 		onAddChildClick,
 		childButtons,
 		onDeleteNodeClick,
+		messageDescription,
+		onMessageDescriptionChange,
+		onDescriptionInputDeFocus,
 	} = useConfigNode({
 		rootId,
 	});
@@ -53,6 +56,14 @@ const ConfigNode = (props: Props) => {
 						/>
 					)}
 				</div>
+
+				<TextareaInput
+					className="mt-4"
+					value={messageDescription}
+					onChange={onMessageDescriptionChange}
+					placeholder="A short description of the message"
+					onBlur={onDescriptionInputDeFocus}
+				/>
 			</div>
 			<div className="w-full flex items-center justify-center">
 				<div className="w-fit flex items-center mt-5 overflow-x-auto">
