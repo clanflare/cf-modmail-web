@@ -37,6 +37,7 @@ const config = {
 				"secondary-light": "#DCDCE2",
 				"primary-dark": "#0B0B0e",
 				"secondary-dark": "#1A1610",
+				"tertiary-dark": "#362D21",
 				"primary-grey": "#B9B9C6",
 				"secondary-grey": "#9696A9",
 				"tertiary-grey": "#393946",

@@ -1,5 +1,6 @@
 "use client";
 
+import { TextInput } from "@/components/elements";
 import { useConfigNode } from "./hook";
 
 interface Props {
@@ -9,15 +10,24 @@ interface Props {
 const ConfigNode = (props: Props) => {
 	const { rootId } = props;
 
-	const { activeChild, messageTitle, pickActiveChild } = useConfigNode({
+	const {
+		activeChild,
+		messageTitle,
+		pickActiveChild,
+		onMessageTitleChange,
+		children,
+	} = useConfigNode({
 		rootId,
 	});
 
 	return (
 		<div className="w-full flex flex-col">
-			<div className="w-full flex flex-col px-5 py-2 bg-secondary-dark rounded-md h-96">
-                
-            </div>
+			<div className="w-full flex flex-col px-5 py-5 bg-secondary-dark rounded-md">
+				<TextInput
+					value={messageTitle}
+					onChange={onMessageTitleChange}
+				/>
+			</div>
 		</div>
 	);
 };
