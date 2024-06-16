@@ -13,9 +13,9 @@ export const useNodeRelationsStore = create<NodeRelationsStore>()((set) => ({
 	nodeRelations: new Map<string, Array<string>>(),
 	addNodeRelation: (key, data) =>
 		set((prev) => {
-			const nodeRelations: Map<string, Array<string>> = {
+			const nodeRelations: Map<string, Array<string>> = new Map({
 				...prev.nodeRelations,
-			};
+			});
 
 			nodeRelations.set(key, data);
 
@@ -27,9 +27,9 @@ export const useNodeRelationsStore = create<NodeRelationsStore>()((set) => ({
 		const deleteNodeList: Array<string> = [];
 
 		set((prev) => {
-			const nodeRelations: Map<string, Array<string>> = {
+			const nodeRelations: Map<string, Array<string>> = new Map({
 				...prev.nodeRelations,
-			};
+			});
 
 			const deletionQueue: Array<string> = [];
 			deletionQueue.push(key);
@@ -58,9 +58,9 @@ export const useNodeRelationsStore = create<NodeRelationsStore>()((set) => ({
 	},
 	addNodeChild: (key, child) =>
 		set((prev) => {
-			const nodeRelations: Map<string, Array<string>> = {
+			const nodeRelations: Map<string, Array<string>> = new Map({
 				...prev.nodeRelations,
-			};
+			});
 
 			const prevChildren = nodeRelations.get(key);
 
@@ -77,9 +77,9 @@ export const useNodeRelationsStore = create<NodeRelationsStore>()((set) => ({
 		const deleteNodeList: Array<string> = [];
 
 		set((prev) => {
-			const nodeRelations: Map<string, Array<string>> = {
+			const nodeRelations: Map<string, Array<string>> = new Map({
 				...prev.nodeRelations,
-			};
+			});
 
 			const deletionQueue: Array<string> = [];
 			const prevChildren = nodeRelations.get(key);
