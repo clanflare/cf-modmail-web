@@ -40,7 +40,7 @@ const ConfigNode = (props: Props) => {
 	});
 
 	return (
-		<div className="w-full flex flex-col">
+		<div className="w-full flex flex-col mt-5">
 			<div className="w-full flex flex-col px-5 py-5 bg-secondary-dark rounded-md">
 				<div className="flex items-center">
 					<p className="text-base text-primary-light mr-2">
@@ -89,8 +89,8 @@ const ConfigNode = (props: Props) => {
 					/>
 				</div>
 			</div>
-			<div className="w-full flex items-center justify-center">
-				<div className="w-fit flex items-center mt-5 overflow-x-auto">
+			<div className="w-full flex items-center justify-center mt-5">
+				<div className="w-fit flex items-center overflow-x-auto">
 					<SolidBtn
 						title=""
 						LeftIcon={Plus}
