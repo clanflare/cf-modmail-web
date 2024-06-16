@@ -10,7 +10,7 @@ export const useConfigNode = (args: Args) => {
 	const { rootId } = args;
 
 	const { nodeRelations } = useNodeRelationsStore();
-	const { messageConfigs } = useMessageConfigStore();
+	const { messageConfigs, setConfig } = useMessageConfigStore();
 
 	const children = nodeRelations.get(rootId);
 	const messageBody = messageConfigs.get(rootId);
@@ -24,11 +24,22 @@ export const useConfigNode = (args: Args) => {
 
 	const pickActiveChild = (childId: string) => setActiveChild(childId);
 
+	const onTitleInputDeFocus = () => {
+		if (messageTitle === messageBody?.name) return;
+
+		setConfig(rootId, {
+			isAiMessage: messageBody?.isAiMessage ?? false,
+			description: messageBody?.description ?? "",
+			name: messageTitle,
+		});
+	};
+
 	return {
 		activeChild,
 		messageTitle,
 		pickActiveChild,
 		children,
 		onMessageTitleChange: onTextInputChange(setMessageTitle),
+		onTitleInputDeFocus,
 	};
 };

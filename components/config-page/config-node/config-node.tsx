@@ -16,6 +16,7 @@ const ConfigNode = (props: Props) => {
 		pickActiveChild,
 		onMessageTitleChange,
 		children,
+		onTitleInputDeFocus,
 	} = useConfigNode({
 		rootId,
 	});
@@ -26,6 +27,7 @@ const ConfigNode = (props: Props) => {
 				<TextInput
 					value={messageTitle}
 					onChange={onMessageTitleChange}
+					onBlur={onTitleInputDeFocus}
 				/>
 			</div>
 		</div>
