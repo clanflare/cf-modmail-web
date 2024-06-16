@@ -58,12 +58,17 @@ const ConfigNode = (props: Props) => {
 				</div>
 
 				<TextareaInput
-					className="mt-4"
+					className="mt-5"
 					value={messageDescription}
 					onChange={onMessageDescriptionChange}
 					placeholder="A short description of the message"
 					onBlur={onDescriptionInputDeFocus}
 				/>
+
+				<div className="w-full flex justify-between items-center mt-5">
+					<SolidBtn title="Add Embed" className="w-fit" />
+					<SolidBtn title="Attach File" className="w-fit" />
+				</div>
 			</div>
 			<div className="w-full flex items-center justify-center">
 				<div className="w-fit flex items-center mt-5 overflow-x-auto">
@@ -98,20 +103,6 @@ const ConfigNode = (props: Props) => {
 					))}
 				</div>
 			</div>
-
-			{/* {activeChild && (
-				<>
-					{useMemo(
-						() => (
-							<>
-								{console.log(activeChild)}
-								<ConfigNode rootId={activeChild} />
-							</>
-						),
-						[activeChild],
-					)}
-				</>
-			)} */}
 
 			{activeChild && (
 				<ConfigNode
