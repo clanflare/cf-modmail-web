@@ -1,6 +1,10 @@
 import { useMessageConfigStore, useNodeRelationsStore } from "@/store";
 import { MessageConfig } from "@/types/common";
-import { getInitialMessage, onTextInputChange } from "@/utils";
+import {
+	getInitialMessage,
+	onTextInputChange,
+	onTextareaInputChange,
+} from "@/utils";
 import { useEffect, useState } from "react";
 
 interface Args {
@@ -25,7 +29,7 @@ export const useConfigNode = (args: Args) => {
 	const [activeChild, setActiveChild] = useState<string | null>(null);
 	const [messageBody, setMessageBody] = useState<MessageConfig | undefined>();
 	const [messageTitle, setMessageTitle] = useState<string>("");
-	// const [messageDescription, setMessageDescription] = useState<string>()
+	const [messageDescription, setMessageDescription] = useState<string>("");
 
 	const pickActiveChild = (childId: string) => setActiveChild(childId);
 
@@ -36,6 +40,16 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: messageBody?.isAiMessage ?? false,
 			description: messageBody?.description ?? "",
 			name: messageTitle,
+		});
+	};
+
+	const onDescriptionInputDeFocus = () => {
+		if (messageTitle === messageBody?.description) return;
+
+		setConfig(rootId, {
+			isAiMessage: messageBody?.isAiMessage ?? false,
+			description: messageDescription,
+			name: messageBody?.name ?? "",
 		});
 	};
 
@@ -75,6 +89,7 @@ export const useConfigNode = (args: Args) => {
 		setMessageBody(fetchedMessageBody);
 		if (fetchedMessageBody) {
 			setMessageTitle(fetchedMessageBody.name);
+			setMessageDescription(fetchedMessageBody.description);
 		}
 
 		const fetchedChildren = nodeRelations.get(rootId);
@@ -104,9 +119,14 @@ export const useConfigNode = (args: Args) => {
 		messageTitle,
 		pickActiveChild,
 		onMessageTitleChange: onTextInputChange(setMessageTitle),
+		onMessageDescriptionChange: onTextareaInputChange(
+			setMessageDescription,
+		),
+		messageDescription,
 		onTitleInputDeFocus,
 		onAddChildClick,
 		childButtons,
 		onDeleteNodeClick,
+		onDescriptionInputDeFocus,
 	};
 };

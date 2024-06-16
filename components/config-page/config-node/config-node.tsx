@@ -1,6 +1,6 @@
 "use client";
 
-import { SolidBtn, TextInput } from "@/components/elements";
+import { SolidBtn, TextInput, TextareaInput } from "@/components/elements";
 import { useConfigNode } from "./hook";
 import { Plus, Trash } from "lucide-react";
 import { twMerge } from "tailwind-merge";
@@ -29,6 +29,9 @@ const ConfigNode = (props: Props) => {
 		onAddChildClick,
 		childButtons,
 		onDeleteNodeClick,
+		messageDescription,
+		onMessageDescriptionChange,
+		onDescriptionInputDeFocus,
 	} = useConfigNode({
 		rootId,
 	});
@@ -52,6 +55,19 @@ const ConfigNode = (props: Props) => {
 							onClick={() => props.onDeleteNode(rootId)}
 						/>
 					)}
+				</div>
+
+				<TextareaInput
+					className="mt-5"
+					value={messageDescription}
+					onChange={onMessageDescriptionChange}
+					placeholder="A short description of the message"
+					onBlur={onDescriptionInputDeFocus}
+				/>
+
+				<div className="w-full flex justify-between items-center mt-5">
+					<SolidBtn title="Add Embed" className="w-fit px-3 py-1 rounded-lg" />
+					<SolidBtn title="Attach File" className="w-fit px-3 py-1 rounded-lg" />
 				</div>
 			</div>
 			<div className="w-full flex items-center justify-center">
@@ -87,20 +103,6 @@ const ConfigNode = (props: Props) => {
 					))}
 				</div>
 			</div>
-
-			{/* {activeChild && (
-				<>
-					{useMemo(
-						() => (
-							<>
-								{console.log(activeChild)}
-								<ConfigNode rootId={activeChild} />
-							</>
-						),
-						[activeChild],
-					)}
-				</>
-			)} */}
 
 			{activeChild && (
 				<ConfigNode
