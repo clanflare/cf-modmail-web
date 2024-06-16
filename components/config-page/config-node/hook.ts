@@ -53,6 +53,14 @@ export const useConfigNode = (args: Args) => {
 		});
 	};
 
+	const onAIButtonClick = (newState: boolean) => {
+		setConfig(rootId, {
+			isAiMessage: newState,
+			description: messageBody?.description ?? "",
+			name: messageBody?.name ?? "",
+		});
+	};
+
 	const onAddChildClick = () => {
 		if (children && children.length === 5) return;
 
@@ -128,5 +136,7 @@ export const useConfigNode = (args: Args) => {
 		childButtons,
 		onDeleteNodeClick,
 		onDescriptionInputDeFocus,
+		isAIMessageAllowed: messageBody?.isAiMessage,
+		onAIButtonClick,
 	};
 };
