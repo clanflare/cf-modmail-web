@@ -2,15 +2,23 @@
 
 import { SolidBtn, TextInput } from "@/components/elements";
 import { useConfigNode } from "./hook";
-import { Plus } from "lucide-react";
+import { Plus, Trash } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-interface Props {
+type Props = {
 	rootId: string;
-}
+} & (
+	| {
+			isRoot?: false;
+			onDeleteNode: (id: string) => void;
+	  }
+	| {
+			isRoot: true;
+	  }
+);
 
 const ConfigNode = (props: Props) => {
-	const { rootId } = props;
+	const { rootId, isRoot } = props;
 
 	const {
 		activeChild,
@@ -20,6 +28,7 @@ const ConfigNode = (props: Props) => {
 		onTitleInputDeFocus,
 		onAddChildClick,
 		childButtons,
+		onDeleteNodeClick,
 	} = useConfigNode({
 		rootId,
 	});
@@ -27,11 +36,23 @@ const ConfigNode = (props: Props) => {
 	return (
 		<div className="w-full flex flex-col">
 			<div className="w-full flex flex-col px-5 py-5 bg-secondary-dark rounded-md">
-				<TextInput
-					value={messageTitle}
-					onChange={onMessageTitleChange}
-					onBlur={onTitleInputDeFocus}
-				/>
+				<div className="w-full flex items-center">
+					<TextInput
+						value={messageTitle}
+						onChange={onMessageTitleChange}
+						onBlur={onTitleInputDeFocus}
+					/>
+
+					{!isRoot && (
+						<SolidBtn
+							className="p-0 bg-transparent hover:bg-transparent ml-2 w-fit"
+							LeftIcon={Trash}
+							leftIconClassName="text-primary-red pr-0"
+							title=""
+							onClick={() => props.onDeleteNode(rootId)}
+						/>
+					)}
+				</div>
 			</div>
 			<div className="w-full flex items-center justify-center">
 				<div className="w-fit flex items-center mt-5 overflow-x-auto">
@@ -59,10 +80,34 @@ const ConfigNode = (props: Props) => {
 									? "text-primary-dark"
 									: "",
 							)}
+							onClick={() =>
+								pickActiveChild(childButton.buttonId)
+							}
 						/>
 					))}
 				</div>
 			</div>
+
+			{/* {activeChild && (
+				<>
+					{useMemo(
+						() => (
+							<>
+								{console.log(activeChild)}
+								<ConfigNode rootId={activeChild} />
+							</>
+						),
+						[activeChild],
+					)}
+				</>
+			)} */}
+
+			{activeChild && (
+				<ConfigNode
+					rootId={activeChild}
+					onDeleteNode={onDeleteNodeClick}
+				/>
+			)}
 		</div>
 	);
 };

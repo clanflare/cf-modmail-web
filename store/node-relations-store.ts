@@ -96,6 +96,8 @@ export const useNodeRelationsStore = create<NodeRelationsStore>()((set) => ({
 				if (nestedChildren) {
 					deletionQueue.push(...nestedChildren);
 				}
+
+				nodeRelations.delete(child);
 			}
 
 			while (deletionQueue.length > 0) {
