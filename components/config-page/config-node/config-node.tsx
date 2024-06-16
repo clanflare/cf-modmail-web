@@ -66,8 +66,8 @@ const ConfigNode = (props: Props) => {
 				/>
 
 				<div className="w-full flex justify-between items-center mt-5">
-					<SolidBtn title="Add Embed" className="w-fit" />
-					<SolidBtn title="Attach File" className="w-fit" />
+					<SolidBtn title="Add Embed" className="w-fit px-3 py-1 rounded-lg" />
+					<SolidBtn title="Attach File" className="w-fit px-3 py-1 rounded-lg" />
 				</div>
 			</div>
 			<div className="w-full flex items-center justify-center">
