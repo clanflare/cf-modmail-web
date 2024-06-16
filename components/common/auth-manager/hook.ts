@@ -3,6 +3,8 @@ import {
 	useAppLoadStateStore,
 	useAuthStateStore,
 	useAuthTokenStore,
+	useMessageConfigStore,
+	useNodeRelationsStore,
 } from "@/store";
 import { useEffect, useRef } from "react";
 
@@ -10,6 +12,10 @@ export const useAuthManager = () => {
 	const { token, setToken } = useAuthTokenStore();
 	const { isAuthenticated, setIsAuthenticated } = useAuthStateStore();
 	const { isAppLoaded, setIsAppLoaded } = useAppLoadStateStore();
+
+	// TODO: DELETE ONCE TEMP OVER INITIALIZATION
+	const { addNodeRelation } = useNodeRelationsStore();
+	const { setConfig } = useMessageConfigStore();
 
 	const isAppMounted = useRef<boolean>(false);
 
@@ -21,6 +27,12 @@ export const useAuthManager = () => {
 			setToken(prevAuthState.token);
 		}
 
+		addNodeRelation("root", []);
+		setConfig("root", {
+			name: "☠️ Sabka Maut",
+			description: "",
+			isAiMessage: false,
+		});
 		setIsAppLoaded(true);
 	};
 

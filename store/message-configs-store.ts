@@ -11,9 +11,9 @@ export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
 	messageConfigs: new Map<string, MessageConfig>(),
 	setConfig: (key, config) =>
 		set((prev) => {
-			const newConfigs: Map<string, MessageConfig> = new Map({
-				...prev.messageConfigs,
-			});
+			const newConfigs: Map<string, MessageConfig> = new Map(
+				prev.messageConfigs,
+			);
 
 			newConfigs.set(key, config);
 
@@ -23,9 +23,9 @@ export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
 		}),
 	deleteConfigs: (keys) =>
 		set((prev) => {
-			const newConfigs: Map<string, MessageConfig> = new Map({
-				...prev.messageConfigs,
-			});
+			const newConfigs: Map<string, MessageConfig> = new Map(
+				prev.messageConfigs,
+			);
 
 			for (const key of keys) {
 				newConfigs.delete(key);
