@@ -4,6 +4,7 @@ import { SolidBtn, TextInput, TextareaInput } from "@/components/elements";
 import { useConfigNode } from "./hook";
 import { Plus, Trash } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import { Switch } from "@/components/ui/switch";
 
 type Props = {
 	rootId: string;
@@ -32,6 +33,8 @@ const ConfigNode = (props: Props) => {
 		messageDescription,
 		onMessageDescriptionChange,
 		onDescriptionInputDeFocus,
+		isAIMessageAllowed,
+		onAIButtonClick,
 	} = useConfigNode({
 		rootId,
 	});
@@ -39,7 +42,17 @@ const ConfigNode = (props: Props) => {
 	return (
 		<div className="w-full flex flex-col">
 			<div className="w-full flex flex-col px-5 py-5 bg-secondary-dark rounded-md">
-				<div className="w-full flex items-center">
+				<div className="flex items-center">
+					<p className="text-base text-primary-light mr-2">
+						AI Answers
+					</p>
+					<Switch
+						onCheckedChange={onAIButtonClick}
+						checked={isAIMessageAllowed}
+					/>
+				</div>
+
+				<div className="w-full flex items-center mt-5">
 					<TextInput
 						value={messageTitle}
 						onChange={onMessageTitleChange}
@@ -66,8 +79,14 @@ const ConfigNode = (props: Props) => {
 				/>
 
 				<div className="w-full flex justify-between items-center mt-5">
-					<SolidBtn title="Add Embed" className="w-fit px-3 py-1 rounded-lg" />
-					<SolidBtn title="Attach File" className="w-fit px-3 py-1 rounded-lg" />
+					<SolidBtn
+						title="Add Embed"
+						className="w-fit px-3 py-1 rounded-lg"
+					/>
+					<SolidBtn
+						title="Attach File"
+						className="w-fit px-3 py-1 rounded-lg"
+					/>
 				</div>
 			</div>
 			<div className="w-full flex items-center justify-center">

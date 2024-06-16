@@ -30,6 +30,8 @@ export const useConfigNode = (args: Args) => {
 	const [messageBody, setMessageBody] = useState<MessageConfig | undefined>();
 	const [messageTitle, setMessageTitle] = useState<string>("");
 	const [messageDescription, setMessageDescription] = useState<string>("");
+	const [isAIMessageAllowed, setIsAIMessageAllowed] =
+		useState<boolean>(false);
 
 	const pickActiveChild = (childId: string) => setActiveChild(childId);
 
@@ -49,6 +51,14 @@ export const useConfigNode = (args: Args) => {
 		setConfig(rootId, {
 			isAiMessage: messageBody?.isAiMessage ?? false,
 			description: messageDescription,
+			name: messageBody?.name ?? "",
+		});
+	};
+
+	const onAIButtonClick = (newState: boolean) => {
+		setConfig(rootId, {
+			isAiMessage: newState,
+			description: messageBody?.description ?? "",
 			name: messageBody?.name ?? "",
 		});
 	};
@@ -90,6 +100,7 @@ export const useConfigNode = (args: Args) => {
 		if (fetchedMessageBody) {
 			setMessageTitle(fetchedMessageBody.name);
 			setMessageDescription(fetchedMessageBody.description);
+			setIsAIMessageAllowed(fetchedMessageBody.isAiMessage);
 		}
 
 		const fetchedChildren = nodeRelations.get(rootId);
@@ -128,5 +139,7 @@ export const useConfigNode = (args: Args) => {
 		childButtons,
 		onDeleteNodeClick,
 		onDescriptionInputDeFocus,
+		isAIMessageAllowed: messageBody?.isAiMessage,
+		onAIButtonClick,
 	};
 };
