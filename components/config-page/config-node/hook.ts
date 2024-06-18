@@ -40,6 +40,7 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: messageBody?.isAiMessage ?? false,
 			description: messageBody?.description ?? "",
 			name: messageTitle,
+			embeds: messageBody?.embeds ?? [],
 		});
 	};
 
@@ -50,6 +51,7 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: messageBody?.isAiMessage ?? false,
 			description: messageDescription,
 			name: messageBody?.name ?? "",
+			embeds: messageBody?.embeds ?? [],
 		});
 	};
 
@@ -58,6 +60,7 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: newState,
 			description: messageBody?.description ?? "",
 			name: messageBody?.name ?? "",
+			embeds: messageBody?.embeds ?? [],
 		});
 	};
 
@@ -72,6 +75,7 @@ export const useConfigNode = (args: Args) => {
 			name: newInitialMessage,
 			isAiMessage: false,
 			description: "",
+			embeds: [],
 		});
 
 		setActiveChild(newNodeId);
