@@ -1,4 +1,4 @@
-import { MessageConfig } from "@/types/common";
+import { MessageConfig } from "@/types/models";
 import { create } from "zustand";
 
 interface MessageConfigStore {
