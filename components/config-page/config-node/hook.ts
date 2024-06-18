@@ -120,8 +120,6 @@ export const useConfigNode = (args: Args) => {
 		}
 	}, [messageConfigs, rootId, nodeRelations]);
 
-	useEffect(() => {}, [rootId, nodeRelations]);
-
 	return {
 		activeChild,
 		messageTitle,
