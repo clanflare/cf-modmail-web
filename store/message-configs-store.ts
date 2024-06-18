@@ -8,6 +8,7 @@ interface MessageConfigStore {
 	appendEmbed: (key: string, embed: Embed) => void;
 	updateEmbed: (key: string, index: number, embed: Embed) => void;
 	deleteEmbed: (key: string, index: number) => void;
+	appendEmptyEmbed: (key: string) => void;
 }
 
 export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
@@ -104,6 +105,42 @@ export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
 			newConfigs.set(key, {
 				...oldMessageConfig,
 				embeds: remainingEmbeds,
+			});
+
+			return {
+				messageConfigs: newConfigs,
+			};
+		}),
+	appendEmptyEmbed: (key) =>
+		set((prev) => {
+			const newConfigs: Map<string, MessageConfig> = new Map(
+				prev.messageConfigs,
+			);
+
+			const oldMessageConfig = newConfigs.get(key);
+
+			if (!oldMessageConfig)
+				return {
+					messageConfigs: newConfigs,
+				};
+
+			newConfigs.set(key, {
+				...oldMessageConfig,
+				embeds: [
+					{
+						title: "",
+						description: "",
+						image_url: "",
+						color: "",
+						thumbnail_url: "",
+						url: "",
+						footer: {
+							icon_url: "",
+							text: "",
+						},
+					},
+					...oldMessageConfig.embeds,
+				],
 			});
 
 			return {

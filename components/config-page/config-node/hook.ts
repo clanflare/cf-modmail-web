@@ -21,7 +21,7 @@ export const useConfigNode = (args: Args) => {
 
 	const { nodeRelations, addNodeChild, removeNodeChild } =
 		useNodeRelationsStore();
-	const { messageConfigs, setConfig, deleteConfigs } =
+	const { messageConfigs, setConfig, deleteConfigs, appendEmptyEmbed } =
 		useMessageConfigStore();
 
 	const [children, setChildren] = useState<Array<string>>([]);
@@ -96,6 +96,10 @@ export const useConfigNode = (args: Args) => {
 		deleteConfigs(nodesToBeDeleted);
 	};
 
+	const onAddEmbedClick = () => {
+		appendEmptyEmbed(rootId);
+	};
+
 	useEffect(() => {
 		const fetchedMessageBody = messageConfigs.get(rootId);
 		setMessageBody(fetchedMessageBody);
@@ -140,5 +144,7 @@ export const useConfigNode = (args: Args) => {
 		onDescriptionInputDeFocus,
 		isAIMessageAllowed: messageBody?.isAiMessage,
 		onAIButtonClick,
+		onAddEmbedClick,
+		embeds: messageBody?.embeds ?? [],
 	};
 };

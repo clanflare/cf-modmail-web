@@ -5,6 +5,8 @@ import { useConfigNode } from "./hook";
 import { Plus, Trash } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { Switch } from "@/components/ui/switch";
+import { Accordion } from "@/components/ui/accordion";
+import { EmbedAccordion } from "../embed-accordion";
 
 type Props = {
 	rootId: string;
@@ -35,6 +37,8 @@ const ConfigNode = (props: Props) => {
 		onDescriptionInputDeFocus,
 		isAIMessageAllowed,
 		onAIButtonClick,
+		onAddEmbedClick,
+		embeds,
 	} = useConfigNode({
 		rootId,
 	});
@@ -82,12 +86,24 @@ const ConfigNode = (props: Props) => {
 					<SolidBtn
 						title="Add Embed"
 						className="w-fit px-3 py-1 rounded-lg"
+						onClick={onAddEmbedClick}
 					/>
 					<SolidBtn
 						title="Attach File"
 						className="w-fit px-3 py-1 rounded-lg"
 					/>
 				</div>
+
+				<Accordion type="single">
+					{embeds.map((embed, index) => (
+						<EmbedAccordion
+							key={index}
+							configId={rootId}
+							embed={embed}
+							embedIndex={index}
+						/>
+					))}
+				</Accordion>
 			</div>
 			<div className="w-full flex items-center justify-center mt-5">
 				<div className="w-fit flex items-center overflow-x-auto">

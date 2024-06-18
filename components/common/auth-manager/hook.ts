@@ -32,6 +32,7 @@ export const useAuthManager = () => {
 			name: "☠️ Sabka Maut",
 			description: "",
 			isAiMessage: false,
+			embeds: [],
 		});
 		setIsAppLoaded(true);
 	};
