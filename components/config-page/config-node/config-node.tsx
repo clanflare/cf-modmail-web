@@ -94,7 +94,7 @@ const ConfigNode = (props: Props) => {
 					/>
 				</div>
 
-				<Accordion type="single">
+				<Accordion type="single" collapsible>
 					{embeds.map((embed, index) => (
 						<EmbedAccordion
 							key={index}

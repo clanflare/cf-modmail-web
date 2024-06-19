@@ -127,11 +127,12 @@ export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
 			newConfigs.set(key, {
 				...oldMessageConfig,
 				embeds: [
+					...oldMessageConfig.embeds,
 					{
 						title: "",
 						description: "",
 						image_url: "",
-						color: "",
+						color: "#fff",
 						thumbnail_url: "",
 						url: "",
 						footer: {
@@ -139,7 +140,6 @@ export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
 							text: "",
 						},
 					},
-					...oldMessageConfig.embeds,
 				],
 			});
 
