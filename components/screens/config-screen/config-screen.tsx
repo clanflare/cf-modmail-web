@@ -12,7 +12,7 @@ const ConfigScreen = () => {
 	return (
 		<main
 			className={twMerge(
-				`min-h-screen w-full flex flex-col bg-primary-dark pt-16 px-5`,
+				`min-h-screen w-full flex flex-col bg-primary-dark pt-16 px-5 pb-10`,
 				isSidebarOpen ? "md:pl-64" : "",
 			)}
 		>

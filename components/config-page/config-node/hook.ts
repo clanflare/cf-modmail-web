@@ -21,7 +21,7 @@ export const useConfigNode = (args: Args) => {
 
 	const { nodeRelations, addNodeChild, removeNodeChild } =
 		useNodeRelationsStore();
-	const { messageConfigs, setConfig, deleteConfigs } =
+	const { messageConfigs, setConfig, deleteConfigs, appendEmptyEmbed } =
 		useMessageConfigStore();
 
 	const [children, setChildren] = useState<Array<string>>([]);
@@ -40,6 +40,7 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: messageBody?.isAiMessage ?? false,
 			description: messageBody?.description ?? "",
 			name: messageTitle,
+			embeds: messageBody?.embeds ?? [],
 		});
 	};
 
@@ -50,6 +51,7 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: messageBody?.isAiMessage ?? false,
 			description: messageDescription,
 			name: messageBody?.name ?? "",
+			embeds: messageBody?.embeds ?? [],
 		});
 	};
 
@@ -58,6 +60,7 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: newState,
 			description: messageBody?.description ?? "",
 			name: messageBody?.name ?? "",
+			embeds: messageBody?.embeds ?? [],
 		});
 	};
 
@@ -72,6 +75,7 @@ export const useConfigNode = (args: Args) => {
 			name: newInitialMessage,
 			isAiMessage: false,
 			description: "",
+			embeds: [],
 		});
 
 		setActiveChild(newNodeId);
@@ -90,6 +94,10 @@ export const useConfigNode = (args: Args) => {
 
 		const nodesToBeDeleted = removeNodeChild(rootId, id);
 		deleteConfigs(nodesToBeDeleted);
+	};
+
+	const onAddEmbedClick = () => {
+		appendEmptyEmbed(rootId);
 	};
 
 	useEffect(() => {
@@ -120,8 +128,6 @@ export const useConfigNode = (args: Args) => {
 		}
 	}, [messageConfigs, rootId, nodeRelations]);
 
-	useEffect(() => {}, [rootId, nodeRelations]);
-
 	return {
 		activeChild,
 		messageTitle,
@@ -138,5 +144,7 @@ export const useConfigNode = (args: Args) => {
 		onDescriptionInputDeFocus,
 		isAIMessageAllowed: messageBody?.isAiMessage,
 		onAIButtonClick,
+		onAddEmbedClick,
+		embeds: messageBody?.embeds ?? [],
 	};
 };
