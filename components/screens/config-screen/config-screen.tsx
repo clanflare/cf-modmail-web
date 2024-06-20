@@ -33,7 +33,11 @@ const ConfigScreen = () => {
 
 			<div className="w-full flex flex-col items-center justify-center mt-4">
 				<div className="w-full flex max-w-[750px] px-3">
-					{rootMessage ? <ConfigNode rootId="root" isRoot /> : <></>}
+					{rootMessage ? (
+						<ConfigNode rootId="root" isRoot={true} />
+					) : (
+						<></>
+					)}
 				</div>
 			</div>
 		</main>

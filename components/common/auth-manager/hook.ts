@@ -59,7 +59,7 @@ export const useAuthManager = () => {
 
 			addNodeRelation("root", []);
 			setConfig("root", {
-				name: "☠️ Sabka Maut",
+				name: "Initial Message",
 				description: "",
 				isAiMessage: false,
 				embeds: [],

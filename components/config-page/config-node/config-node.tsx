@@ -46,21 +46,26 @@ const ConfigNode = (props: Props) => {
 	return (
 		<div className="w-full flex flex-col mt-5">
 			<div className="w-full flex flex-col px-5 py-5 bg-secondary-dark rounded-md">
-				<div className="flex items-center">
-					<p className="text-base text-primary-light mr-2">
-						AI Answers
-					</p>
-					<Switch
-						onCheckedChange={onAIButtonClick}
-						checked={isAIMessageAllowed}
-					/>
-				</div>
+				{isRoot && (
+					<>
+						<div className="flex items-center">
+							<p className="text-base text-primary-light mr-2">
+								AI Answers
+							</p>
+							<Switch
+								onCheckedChange={onAIButtonClick}
+								checked={isAIMessageAllowed}
+							/>
+						</div>
+					</>
+				)}
 
 				<div className="w-full flex items-center mt-5">
 					<TextInput
 						value={messageTitle}
 						onChange={onMessageTitleChange}
 						onBlur={onTitleInputDeFocus}
+						readOnly={isRoot}
 					/>
 
 					{!isRoot && (
