@@ -1,4 +1,5 @@
 import { saveAuthToken } from "@/actions";
+import { MESSAGE_CONF_KEY, NODE_REL_KEY } from "@/constants/env-config";
 import {
 	useAppLoadStateStore,
 	useAuthStateStore,
@@ -27,6 +28,8 @@ export const useMagicLinkScreen = (args: Args) => {
 		if (response.authToken) {
 			setToken(response.authToken);
 			setIsAuthenticated(true);
+			localStorage.setItem(MESSAGE_CONF_KEY, "{}");
+			localStorage.setItem(NODE_REL_KEY, "{}");
 			router.replace("/");
 		}
 	};
