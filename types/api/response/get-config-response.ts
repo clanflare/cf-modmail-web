@@ -14,7 +14,7 @@ interface Embed {
 }
 
 interface SupportMessage {
-	content: String;
+	content: string;
 	attachments?: Array<string>;
 	embeds?: Array<Embed>;
 }
@@ -26,7 +26,7 @@ interface MessageButton {
 	style?: "Primary" | "Secondary" | "Success" | "Danger";
 }
 
-interface MessageComponent {
+export interface MessageComponent {
 	message: SupportMessage;
 	aiPrompt?: string;
 	buttons?: Array<MessageButton>;

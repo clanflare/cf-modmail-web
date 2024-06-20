@@ -1,5 +1,9 @@
 import { getPrevToken } from "@/actions";
-import { MESSAGE_CONF_KEY, NODE_REL_KEY } from "@/constants/env-config";
+import {
+	API_ENDPOINT,
+	MESSAGE_CONF_KEY,
+	NODE_REL_KEY,
+} from "@/constants/env-config";
 import {
 	useAppLoadStateStore,
 	useAuthStateStore,
@@ -9,6 +13,7 @@ import {
 	useNodeRelationsStore,
 } from "@/store";
 import { MessageConfig } from "@/types/models";
+import { parseConfigResponse } from "@/utils";
 import { useEffect, useRef } from "react";
 
 export const useAuthManager = () => {
@@ -34,7 +39,9 @@ export const useAuthManager = () => {
 		setIsAppLoaded(true);
 	};
 
-	const loadPrevData = () => {
+	// TODO: Extract this to a loader component and write the save data parser as well.
+
+	const loadPrevData = async () => {
 		const savedMessageConfigsString =
 			localStorage.getItem(MESSAGE_CONF_KEY);
 		const savedNodeRelationsString = localStorage.getItem(NODE_REL_KEY);
@@ -55,15 +62,55 @@ export const useAuthManager = () => {
 			!savedMessageConfigs.get("root") ||
 			!savedNodeRelations.get("root")
 		) {
-			// Call API and parse relations & if still do not find anything then go this way.
+			try {
+				const apiResponse = await fetch(`${API_ENDPOINT}/editor`, {
+					method: "GET",
+					headers: {
+						authorization: `Bearer ${token}`,
+						"content-type": "application/json",
+					},
+				});
 
-			addNodeRelation("root", []);
-			setConfig("root", {
-				name: "Initial Message",
-				description: "",
-				isAiMessage: false,
-				embeds: [],
-			});
+				const apiResData = await apiResponse.json();
+
+				console.log(apiResData);
+				console.log(apiResData.message !== "Successful");
+
+				if (apiResData.message !== "Successful") {
+					throw new Error("Something went wrong!!");
+				}
+
+				console.log("HERE");
+
+				const data = parseConfigResponse(apiResData.data);
+
+				console.log(data);
+
+				if (data) {
+					setNodeRelations(data.nodeRelations);
+					setMessageConfigs(data.messageConfigs);
+				} else {
+					addNodeRelation("root", []);
+					setConfig("root", {
+						name: "Initial Message",
+						description: "",
+						isAiMessage: false,
+						embeds: [],
+					});
+				}
+			} catch (error) {
+				console.log(error);
+				console.log("Something went wrong!!");
+				addNodeRelation("root", []);
+				setConfig("root", {
+					name: "Initial Message",
+					description: "",
+					isAiMessage: false,
+					embeds: [],
+				});
+			}
+
+			// Call API and parse relations & if still do not find anything then go this way.
 		} else {
 			setNodeRelations(savedNodeRelations);
 			setMessageConfigs(savedMessageConfigs);
