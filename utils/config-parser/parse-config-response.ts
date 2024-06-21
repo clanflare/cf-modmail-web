@@ -31,35 +31,42 @@ const recursiveParser = (
 
 	console.log("P1");
 
-	const embeds = message && message.message.embeds
-		? message.message.embeds.map(
-				(embed): Embed => ({
-					color: embed.color ?? "#fff",
-					description: embed.description ?? "",
-					title: embed.title ?? "",
-					image_url: embed.image ?? "",
-					thumbnail_url: embed.thumbnail,
-					footer: {
-						icon_url: embed.footer?.iconUrl ?? "",
-						text: embed.footer?.text ?? "",
-					},
-				}),
-			)
-		: [];
+	const embeds =
+		message && message.message.embeds
+			? message.message.embeds.map(
+					(embed): Embed => ({
+						color: embed.color ?? "#fff",
+						description: embed.description ?? "",
+						title: embed.title ?? "",
+						image_url: embed.image ?? "",
+						thumbnail_url: embed.thumbnail,
+						footer: {
+							icon_url: embed.footer?.iconUrl ?? "",
+							text: embed.footer?.text ?? "",
+						},
+					}),
+				)
+			: [];
 
 	config.embeds = embeds;
 
-	const childIds = message && message.buttons
-		? message.buttons.map((_) => crypto.randomUUID())
-		: [];
+	const childIds =
+		message && message.buttons
+			? message.buttons.map((_) => crypto.randomUUID())
+			: [];
 
 	console.log(config, childIds);
 
-	const childrenResponses = message && message.buttons
-		? message.buttons.map((button) =>
-				recursiveParser(button.linkedComponent, false, button.label),
-			)
-		: [];
+	const childrenResponses =
+		message && message.buttons
+			? message.buttons.map((button) =>
+					recursiveParser(
+						button.linkedComponent,
+						false,
+						button.label,
+					),
+				)
+			: [];
 
 	const formedChildNodeRelations: Record<string, Array<string>> = {};
 	const formedChildrenConfigs: Record<string, MessageConfig> = {};
@@ -100,8 +107,6 @@ export const parseConfigResponse = (
 ): ParseConfigResponse => {
 	const { initialMessage, aiSupport } = oldConfig;
 
-	console.log(oldConfig);
-
 	const parsedResponse = recursiveParser(
 		initialMessage,
 		true,
@@ -111,13 +116,6 @@ export const parseConfigResponse = (
 
 	const { childNodeRelations, childrenConfigs, childrenNodeIds, config } =
 		parsedResponse;
-
-	// console.log({
-	// 	childNodeRelations,
-	// 	childrenConfigs,
-	// 	childrenNodeIds,
-	// 	config,
-	// });
 
 	const nodeRelations = new Map(
 		Object.entries({

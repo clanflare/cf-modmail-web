@@ -36,5 +36,5 @@ export interface ConfigResponse {
 	archiveChannelId?: string;
 	modmailCategoryId?: string;
 	aiSupport?: boolean;
-	initialMessage: MessageComponent;
+	initialMessage?: MessageComponent;
 }

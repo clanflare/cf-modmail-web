@@ -7,7 +7,7 @@ import { SaveIcon } from "lucide-react";
 import { ConfigNode } from "@/components/config-page";
 
 const ConfigScreen = () => {
-	const { isSidebarOpen, rootMessage } = useConfigScreen();
+	const { isSidebarOpen, rootMessage, onSaveClick } = useConfigScreen();
 
 	return (
 		<main
@@ -26,6 +26,7 @@ const ConfigScreen = () => {
 						LeftIcon: SaveIcon,
 						leftIconClassName: "md:mr-2",
 						titleClassName: "md:flex hidden",
+						onClick: onSaveClick,
 					}}
 					className="max-w-[750px] w-full"
 				/>
