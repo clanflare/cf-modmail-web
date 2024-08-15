@@ -52,7 +52,7 @@ const config = {
 				quicksand: "'Quicksand', sans-serif",
 				muli: "'muli', sans-serif",
 				ewert: "'Ewert', serif;",
-				bahnschrift: "'Bahnschrift'",
+				bahnschrift: "'Quicksand', sans-serif",
 			},
 		},
 	},

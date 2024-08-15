@@ -41,6 +41,7 @@ const EmbedAccordion = (props: Props) => {
 		title,
 		url,
 		onDescriptionDeFocus,
+		onDeleteClick,
 	} = useEmbedAccordion({
 		configId,
 		embed,
@@ -61,6 +62,7 @@ const EmbedAccordion = (props: Props) => {
 							LeftIcon={Trash}
 							leftIconClassName="text-primary-red pr-0"
 							title=""
+							onClick={onDeleteClick}
 						/>
 					</div>
 				</AccordionTrigger>

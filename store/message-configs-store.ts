@@ -9,6 +9,7 @@ interface MessageConfigStore {
 	updateEmbed: (key: string, index: number, embed: Embed) => void;
 	deleteEmbed: (key: string, index: number) => void;
 	appendEmptyEmbed: (key: string) => void;
+	setMessageConfigs: (messageConfigs: Map<string, MessageConfig>) => void;
 }
 
 export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
@@ -147,4 +148,8 @@ export const useMessageConfigStore = create<MessageConfigStore>()((set) => ({
 				messageConfigs: newConfigs,
 			};
 		}),
+	setMessageConfigs: (configs) =>
+		set(() => ({
+			messageConfigs: configs,
+		})),
 }));

@@ -21,7 +21,7 @@ export const useEmbedAccordion = (args: Args) => {
 	const [footerText, setFooterText] = useState<string>("");
 	const [footerIconUrl, setFooterIconUrl] = useState<string>("");
 
-	const { updateEmbed } = useMessageConfigStore();
+	const { updateEmbed, deleteEmbed } = useMessageConfigStore();
 
 	const onTextInputDeFocus =
 		(
@@ -57,18 +57,21 @@ export const useEmbedAccordion = (args: Args) => {
 		};
 
 	useEffect(() => {
-		if (embed.title && embed.title !== title) setTitle(embed.title);
-		if (embed.description && embed.description !== description)
-			setDescription(embed.description);
-		if (embed.url && embed.url !== url) setUrl(embed.url);
-		if (embed.color && embed.color !== color) setColor(embed.color);
-		if (embed.thumbnail_url && embed.thumbnail_url !== thumbnailUrl)
+		if (embed.title !== undefined) setTitle(embed.title);
+		if (embed.description !== undefined) setDescription(embed.description);
+		if (embed.url !== undefined) setUrl(embed.url);
+		if (embed.color !== undefined) setColor(embed.color);
+		if (embed.thumbnail_url !== undefined)
 			setThumbnailUrl(embed.thumbnail_url);
-		if (embed.footer?.icon_url && embed.footer.icon_url !== footerIconUrl)
+		if (embed.footer?.icon_url !== undefined)
 			setFooterIconUrl(embed.footer.icon_url);
-		if (embed.footer?.text && embed.footer.text !== footerText)
+		if (embed.footer?.text !== undefined)
 			setFooterIconUrl(embed.footer.text);
 	}, [embed]);
+
+	const onDeleteClick = () => {
+		deleteEmbed(configId, embedIndex);
+	};
 
 	return {
 		title,
@@ -101,5 +104,6 @@ export const useEmbedAccordion = (args: Args) => {
 			footerIconUrl,
 		),
 		onDescriptionDeFocus: onTextInputDeFocus("description", description),
+		onDeleteClick,
 	};
 };
