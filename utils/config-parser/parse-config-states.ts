@@ -32,9 +32,11 @@ const recursiveParser = (
 					description: embed.description
 						? embed.description
 						: undefined,
-					image: embed.image_url ? embed.image_url : undefined,
+					image: embed.image_url
+						? { url: embed.image_url }
+						: undefined,
 					thumbnail: embed.thumbnail_url
-						? embed.thumbnail_url
+						? { url: embed.thumbnail_url }
 						: undefined,
 					url: embed.url ? embed.url : undefined,
 					footer:
@@ -102,9 +104,9 @@ export const parseConfigStates = (
 			embeds: sourceConfig.embeds.map((embed) => ({
 				color: embed.color ? embed.color : undefined,
 				description: embed.description ? embed.description : undefined,
-				image: embed.image_url ? embed.image_url : undefined,
+				image: embed.image_url ? { url: embed.image_url } : undefined,
 				thumbnail: embed.thumbnail_url
-					? embed.thumbnail_url
+					? { url: embed.thumbnail_url }
 					: undefined,
 				url: embed.url ? embed.url : undefined,
 				footer:

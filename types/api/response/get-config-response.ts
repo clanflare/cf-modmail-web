@@ -8,9 +8,9 @@ interface Embed {
 		text?: string;
 		iconUrl?: string;
 	};
-	image?: string;
-	thumbnail?: string;
-	video?: string;
+	image?: {url: string};
+	thumbnail?: {url: string};
+	video?: {url: string};
 }
 
 interface SupportMessage {
