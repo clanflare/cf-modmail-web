@@ -18,6 +18,7 @@ const recursiveParser = (
 	message: MessageComponent | undefined,
 	isRoot: boolean,
 	label: string,
+	aiInstructions: string | null,
 	isAiSupport?: boolean,
 ): RecursiveParserResponse => {
 	console.log("P0");
@@ -27,6 +28,7 @@ const recursiveParser = (
 		embeds: [],
 		isAiMessage: isRoot ? isAiSupport ?? false : false,
 		name: label,
+		aiInstructions,
 	};
 
 	console.log("P1");
@@ -64,6 +66,7 @@ const recursiveParser = (
 						button.linkedComponent,
 						false,
 						button.label,
+						button.linkedComponent.aiInstructions ?? null,
 					),
 				)
 			: [];
@@ -105,13 +108,14 @@ const recursiveParser = (
 export const parseConfigResponse = (
 	oldConfig: ConfigResponse,
 ): ParseConfigResponse => {
-	const { initialMessage, aiSupport } = oldConfig;
+	const { initialMessage } = oldConfig;
 
 	const parsedResponse = recursiveParser(
 		initialMessage,
 		true,
 		"Initial Message",
-		aiSupport,
+		oldConfig.aiInstructions ?? null,
+		// aiSupport,
 	);
 
 	const { childNodeRelations, childrenConfigs, childrenNodeIds, config } =

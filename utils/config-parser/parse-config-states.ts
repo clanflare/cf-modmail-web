@@ -25,6 +25,7 @@ const recursiveParser = (
 		if (!childNodeIds) throw new Error("No children!!");
 
 		const component: MessageComponent = {
+			aiInstructions: config.aiInstructions,
 			message: {
 				content: config.description,
 				embeds: config.embeds.map((embed) => ({
@@ -93,10 +94,11 @@ export const parseConfigStates = (
 	if (!sourceChildren) throw new Error("No children!!");
 
 	const config: ConfigResponse = {
-		aiSupport: sourceConfig.isAiMessage,
+		// aiSupport: sourceConfig.isAiMessage,
 	};
 
 	config["initialMessage"] = {
+		aiInstructions: sourceConfig.aiInstructions,
 		message: {
 			content: sourceConfig.description,
 			embeds: sourceConfig.embeds.map((embed) => ({

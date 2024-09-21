@@ -39,6 +39,9 @@ const ConfigNode = (props: Props) => {
 		onAIButtonClick,
 		onAddEmbedClick,
 		embeds,
+		aiInstructions,
+		onAiInstructionsChange,
+		onAiInstructionsInputDeFocus,
 	} = useConfigNode({
 		rootId,
 	});
@@ -85,6 +88,14 @@ const ConfigNode = (props: Props) => {
 					onChange={onMessageDescriptionChange}
 					placeholder="A short description of the message"
 					onBlur={onDescriptionInputDeFocus}
+				/>
+
+				<TextareaInput
+					className="mt-5"
+					value={aiInstructions}
+					onChange={onAiInstructionsChange}
+					placeholder="A short instruction for the ai"
+					onBlur={onAiInstructionsInputDeFocus}
 				/>
 
 				<div className="w-full flex justify-between items-center mt-5">

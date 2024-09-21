@@ -4,5 +4,6 @@ export interface MessageConfig {
 	name: string;
 	description: string;
 	isAiMessage: boolean;
+	aiInstructions: string | null;
 	embeds: Array<Embed>;
 }

@@ -28,13 +28,14 @@ interface MessageButton {
 
 export interface MessageComponent {
 	message: SupportMessage;
-	aiPrompt?: string;
+	aiInstructions: string | null;
 	buttons?: Array<MessageButton>;
 }
 
 export interface ConfigResponse {
 	archiveChannelId?: string;
 	modmailCategoryId?: string;
-	aiSupport?: boolean;
+	// aiSupport?: boolean;
 	initialMessage?: MessageComponent;
+	aiInstructions?: string | null;
 }

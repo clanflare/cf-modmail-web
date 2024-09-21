@@ -30,6 +30,7 @@ export const useConfigNode = (args: Args) => {
 	const [messageBody, setMessageBody] = useState<MessageConfig | undefined>();
 	const [messageTitle, setMessageTitle] = useState<string>("");
 	const [messageDescription, setMessageDescription] = useState<string>("");
+	const [aiInstructions, setAiInstructions] = useState<string>("");
 
 	const pickActiveChild = (childId: string) => setActiveChild(childId);
 
@@ -41,17 +42,39 @@ export const useConfigNode = (args: Args) => {
 			description: messageBody?.description ?? "",
 			name: messageTitle,
 			embeds: messageBody?.embeds ?? [],
+			aiInstructions: null,
 		});
 	};
 
 	const onDescriptionInputDeFocus = () => {
-		if (messageTitle === messageBody?.description) return;
+		if (
+			messageBody?.description &&
+			messageDescription === messageBody.description
+		)
+			return;
 
 		setConfig(rootId, {
 			isAiMessage: messageBody?.isAiMessage ?? false,
 			description: messageDescription,
 			name: messageBody?.name ?? "",
 			embeds: messageBody?.embeds ?? [],
+			aiInstructions: null,
+		});
+	};
+
+	const onAiInstructionsInputDeFocus = () => {
+		if (
+			messageBody?.aiInstructions &&
+			aiInstructions === messageBody.aiInstructions
+		)
+			return;
+
+		setConfig(rootId, {
+			isAiMessage: messageBody?.isAiMessage ?? false,
+			description: messageDescription,
+			name: messageBody?.name ?? "",
+			embeds: messageBody?.embeds ?? [],
+			aiInstructions: aiInstructions ?? null,
 		});
 	};
 
@@ -61,6 +84,7 @@ export const useConfigNode = (args: Args) => {
 			description: messageBody?.description ?? "",
 			name: messageBody?.name ?? "",
 			embeds: messageBody?.embeds ?? [],
+			aiInstructions: null,
 		});
 	};
 
@@ -76,6 +100,7 @@ export const useConfigNode = (args: Args) => {
 			isAiMessage: false,
 			description: "",
 			embeds: [],
+			aiInstructions: null,
 		});
 
 		setActiveChild(newNodeId);
@@ -106,6 +131,7 @@ export const useConfigNode = (args: Args) => {
 		if (fetchedMessageBody) {
 			setMessageTitle(fetchedMessageBody.name);
 			setMessageDescription(fetchedMessageBody.description);
+			setAiInstructions(fetchedMessageBody.aiInstructions ?? "");
 		}
 
 		const fetchedChildren = nodeRelations.get(rootId);
@@ -146,5 +172,8 @@ export const useConfigNode = (args: Args) => {
 		onAIButtonClick,
 		onAddEmbedClick,
 		embeds: messageBody?.embeds ?? [],
+		aiInstructions,
+		onAiInstructionsChange: onTextareaInputChange(setAiInstructions),
+		onAiInstructionsInputDeFocus,
 	};
 };
