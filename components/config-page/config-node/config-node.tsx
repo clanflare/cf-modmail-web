@@ -42,6 +42,10 @@ const ConfigNode = (props: Props) => {
 		aiInstructions,
 		onAiInstructionsChange,
 		onAiInstructionsInputDeFocus,
+		categoryId,
+		isCategoryInputActive,
+		onCategoryIdChange,
+		toggleCategoryInputActive,
 	} = useConfigNode({
 		rootId,
 	});
@@ -97,6 +101,27 @@ const ConfigNode = (props: Props) => {
 					placeholder="A short instruction for the ai"
 					onBlur={onAiInstructionsInputDeFocus}
 				/>
+
+				<div className="flex items-center mt-5">
+					<p className="text-base text-primary-light mr-2">
+						Category ID
+					</p>
+					<Switch
+						onCheckedChange={toggleCategoryInputActive}
+						checked={isCategoryInputActive}
+					/>
+				</div>
+
+				{isCategoryInputActive && (
+					<TextInput
+						value={categoryId}
+						onChange={onCategoryIdChange}
+						// onBlur={onTitleInputDeFocus}
+						// readOnly={isRoot}
+						placeholder="Category ID"
+						className="mt-2"
+					/>
+				)}
 
 				<div className="w-full flex justify-between items-center mt-5">
 					<SolidBtn

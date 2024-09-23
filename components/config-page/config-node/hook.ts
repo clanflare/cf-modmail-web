@@ -4,6 +4,7 @@ import {
 	getInitialMessage,
 	onTextInputChange,
 	onTextareaInputChange,
+	toggleBooleanState,
 } from "@/utils";
 import { useEffect, useState } from "react";
 
@@ -31,6 +32,9 @@ export const useConfigNode = (args: Args) => {
 	const [messageTitle, setMessageTitle] = useState<string>("");
 	const [messageDescription, setMessageDescription] = useState<string>("");
 	const [aiInstructions, setAiInstructions] = useState<string>("");
+	const [isCategoryInputActive, setIsCategoryInputActive] =
+		useState<boolean>(false);
+	const [categoryId, setCategoryId] = useState<string>("");
 
 	const pickActiveChild = (childId: string) => setActiveChild(childId);
 
@@ -175,5 +179,9 @@ export const useConfigNode = (args: Args) => {
 		aiInstructions,
 		onAiInstructionsChange: onTextareaInputChange(setAiInstructions),
 		onAiInstructionsInputDeFocus,
+		isCategoryInputActive,
+		toggleCategoryInputActive: toggleBooleanState(setIsCategoryInputActive),
+		categoryId,
+		onCategoryIdChange: onTextInputChange(setCategoryId),
 	};
 };
