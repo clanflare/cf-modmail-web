@@ -46,7 +46,8 @@ export const useConfigNode = (args: Args) => {
 			description: messageBody?.description ?? "",
 			name: messageTitle,
 			embeds: messageBody?.embeds ?? [],
-			aiInstructions: null,
+			aiInstructions: aiInstructions ?? null,
+			categoryId: categoryId ?? null,
 		});
 	};
 
@@ -62,7 +63,8 @@ export const useConfigNode = (args: Args) => {
 			description: messageDescription,
 			name: messageBody?.name ?? "",
 			embeds: messageBody?.embeds ?? [],
-			aiInstructions: null,
+			aiInstructions: aiInstructions ?? null,
+			categoryId: categoryId ?? null,
 		});
 	};
 
@@ -79,6 +81,21 @@ export const useConfigNode = (args: Args) => {
 			name: messageBody?.name ?? "",
 			embeds: messageBody?.embeds ?? [],
 			aiInstructions: aiInstructions ?? null,
+			categoryId: categoryId ?? null,
+		});
+	};
+
+	const onCategoryIdDeFocus = () => {
+		if (messageBody?.categoryId && categoryId === messageBody.categoryId)
+			return;
+
+		setConfig(rootId, {
+			isAiMessage: messageBody?.isAiMessage ?? false,
+			description: messageDescription,
+			name: messageBody?.name ?? "",
+			embeds: messageBody?.embeds ?? [],
+			aiInstructions: aiInstructions ?? null,
+			categoryId: categoryId ?? null,
 		});
 	};
 
@@ -88,7 +105,8 @@ export const useConfigNode = (args: Args) => {
 			description: messageBody?.description ?? "",
 			name: messageBody?.name ?? "",
 			embeds: messageBody?.embeds ?? [],
-			aiInstructions: null,
+			aiInstructions: aiInstructions ?? null,
+			categoryId: categoryId ?? null,
 		});
 	};
 
@@ -105,6 +123,7 @@ export const useConfigNode = (args: Args) => {
 			description: "",
 			embeds: [],
 			aiInstructions: null,
+			categoryId: null,
 		});
 
 		setActiveChild(newNodeId);
@@ -132,10 +151,15 @@ export const useConfigNode = (args: Args) => {
 	useEffect(() => {
 		const fetchedMessageBody = messageConfigs.get(rootId);
 		setMessageBody(fetchedMessageBody);
+		// console.log(fetchedMessageBody);
 		if (fetchedMessageBody) {
 			setMessageTitle(fetchedMessageBody.name);
 			setMessageDescription(fetchedMessageBody.description);
 			setAiInstructions(fetchedMessageBody.aiInstructions ?? "");
+			setIsCategoryInputActive(
+				fetchedMessageBody.categoryId ? true : false,
+			);
+			setCategoryId(fetchedMessageBody.categoryId ?? "");
 		}
 
 		const fetchedChildren = nodeRelations.get(rootId);
@@ -183,5 +207,6 @@ export const useConfigNode = (args: Args) => {
 		toggleCategoryInputActive: toggleBooleanState(setIsCategoryInputActive),
 		categoryId,
 		onCategoryIdChange: onTextInputChange(setCategoryId),
+		onCategoryIdDeFocus,
 	};
 };

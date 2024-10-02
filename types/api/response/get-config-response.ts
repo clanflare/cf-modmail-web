@@ -30,6 +30,7 @@ export interface MessageComponent {
 	message: SupportMessage;
 	aiInstructions: string | null;
 	buttons?: Array<MessageButton>;
+	categoryId: string | null;
 }
 
 export interface ConfigResponse {
@@ -37,5 +38,5 @@ export interface ConfigResponse {
 	modmailCategoryId?: string;
 	// aiSupport?: boolean;
 	initialMessage?: MessageComponent;
-	aiInstructions?: string | null;
+	// aiInstructions?: string | null;
 }

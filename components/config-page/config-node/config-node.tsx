@@ -46,6 +46,7 @@ const ConfigNode = (props: Props) => {
 		isCategoryInputActive,
 		onCategoryIdChange,
 		toggleCategoryInputActive,
+		onCategoryIdDeFocus,
 	} = useConfigNode({
 		rootId,
 	});
@@ -116,7 +117,7 @@ const ConfigNode = (props: Props) => {
 					<TextInput
 						value={categoryId}
 						onChange={onCategoryIdChange}
-						// onBlur={onTitleInputDeFocus}
+						onBlur={onCategoryIdDeFocus}
 						// readOnly={isRoot}
 						placeholder="Category ID"
 						className="mt-2"

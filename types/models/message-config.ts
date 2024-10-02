@@ -6,4 +6,5 @@ export interface MessageConfig {
 	isAiMessage: boolean;
 	aiInstructions: string | null;
 	embeds: Array<Embed>;
+	categoryId: string | null;
 }

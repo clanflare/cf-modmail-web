@@ -13,6 +13,7 @@ export const useChangeConfigManager = () => {
 
 	useEffect(() => {
 		if (isConfigLoaded && messageConfigs) {
+			console.log(Object.fromEntries(messageConfigs));
 			localStorage.setItem(
 				MESSAGE_CONF_KEY,
 				JSON.stringify(Object.fromEntries(messageConfigs)),
