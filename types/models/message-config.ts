@@ -7,4 +7,5 @@ export interface MessageConfig {
 	aiInstructions: string | null;
 	embeds: Array<Embed>;
 	categoryId: string | null;
+	messageToSupportTeam: string | null;
 }

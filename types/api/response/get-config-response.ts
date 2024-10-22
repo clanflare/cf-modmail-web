@@ -31,6 +31,7 @@ export interface MessageComponent {
 	aiInstructions: string | null;
 	buttons?: Array<MessageButton>;
 	categoryId: string | null;
+	messageToSupportTeam: string | null;
 }
 
 export interface ConfigResponse {

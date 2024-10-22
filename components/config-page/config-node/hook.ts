@@ -35,6 +35,10 @@ export const useConfigNode = (args: Args) => {
 	const [isCategoryInputActive, setIsCategoryInputActive] =
 		useState<boolean>(false);
 	const [categoryId, setCategoryId] = useState<string>("");
+	const [isMessageToSupportTeamActive, setIsMessageToSupportTeamActive] =
+		useState<boolean>(false);
+	const [messageToSupportTeam, setMessageToSupportTeam] =
+		useState<string>("");
 
 	const pickActiveChild = (childId: string) => setActiveChild(childId);
 
@@ -48,6 +52,7 @@ export const useConfigNode = (args: Args) => {
 			embeds: messageBody?.embeds ?? [],
 			aiInstructions: aiInstructions ?? null,
 			categoryId: categoryId ?? null,
+			messageToSupportTeam: messageToSupportTeam ?? null,
 		});
 	};
 
@@ -65,6 +70,7 @@ export const useConfigNode = (args: Args) => {
 			embeds: messageBody?.embeds ?? [],
 			aiInstructions: aiInstructions ?? null,
 			categoryId: categoryId ?? null,
+			messageToSupportTeam: messageToSupportTeam ?? null,
 		});
 	};
 
@@ -82,6 +88,7 @@ export const useConfigNode = (args: Args) => {
 			embeds: messageBody?.embeds ?? [],
 			aiInstructions: aiInstructions ?? null,
 			categoryId: categoryId ?? null,
+			messageToSupportTeam: messageToSupportTeam ?? null,
 		});
 	};
 
@@ -96,6 +103,25 @@ export const useConfigNode = (args: Args) => {
 			embeds: messageBody?.embeds ?? [],
 			aiInstructions: aiInstructions ?? null,
 			categoryId: categoryId ?? null,
+			messageToSupportTeam: messageToSupportTeam ?? null,
+		});
+	};
+
+	const onMessageToSupportTeamDeFocus = () => {
+		if (
+			messageBody?.messageToSupportTeam &&
+			messageToSupportTeam === messageBody.messageToSupportTeam
+		)
+			return;
+
+		setConfig(rootId, {
+			isAiMessage: messageBody?.isAiMessage ?? false,
+			description: messageDescription,
+			name: messageBody?.name ?? "",
+			embeds: messageBody?.embeds ?? [],
+			aiInstructions: aiInstructions ?? null,
+			categoryId: categoryId ?? null,
+			messageToSupportTeam: messageToSupportTeam ?? null,
 		});
 	};
 
@@ -107,6 +133,7 @@ export const useConfigNode = (args: Args) => {
 			embeds: messageBody?.embeds ?? [],
 			aiInstructions: aiInstructions ?? null,
 			categoryId: categoryId ?? null,
+			messageToSupportTeam: messageToSupportTeam ?? null,
 		});
 	};
 
@@ -124,6 +151,7 @@ export const useConfigNode = (args: Args) => {
 			embeds: [],
 			aiInstructions: null,
 			categoryId: null,
+			messageToSupportTeam: null,
 		});
 
 		setActiveChild(newNodeId);
@@ -160,6 +188,12 @@ export const useConfigNode = (args: Args) => {
 				fetchedMessageBody.categoryId ? true : false,
 			);
 			setCategoryId(fetchedMessageBody.categoryId ?? "");
+			setIsMessageToSupportTeamActive(
+				fetchedMessageBody.messageToSupportTeam ? true : false,
+			);
+			setMessageToSupportTeam(
+				fetchedMessageBody.messageToSupportTeam ?? "",
+			);
 		}
 
 		const fetchedChildren = nodeRelations.get(rootId);
@@ -208,5 +242,14 @@ export const useConfigNode = (args: Args) => {
 		categoryId,
 		onCategoryIdChange: onTextInputChange(setCategoryId),
 		onCategoryIdDeFocus,
+		isMessageToSupportTeamActive,
+		toggleMessageToSupportTeamActive: toggleBooleanState(
+			setIsMessageToSupportTeamActive,
+		),
+		messageToSupportTeam,
+		onMessageToSupportTeamChange: onTextareaInputChange(
+			setMessageToSupportTeam,
+		),
+		onMessageToSupportTeamDeFocus,
 	};
 };

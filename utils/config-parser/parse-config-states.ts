@@ -27,6 +27,7 @@ const recursiveParser = (
 		const component: MessageComponent = {
 			aiInstructions: config.aiInstructions,
 			categoryId: config.categoryId,
+			messageToSupportTeam: config.messageToSupportTeam,
 			message: {
 				content: config.description,
 				embeds: config.embeds.map((embed) => ({
@@ -101,6 +102,7 @@ export const parseConfigStates = (
 	config["initialMessage"] = {
 		aiInstructions: sourceConfig.aiInstructions,
 		categoryId: sourceConfig.categoryId,
+		messageToSupportTeam: sourceConfig.messageToSupportTeam,
 		message: {
 			content: sourceConfig.description,
 			embeds: sourceConfig.embeds.map((embed) => ({

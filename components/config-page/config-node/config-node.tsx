@@ -47,6 +47,11 @@ const ConfigNode = (props: Props) => {
 		onCategoryIdChange,
 		toggleCategoryInputActive,
 		onCategoryIdDeFocus,
+		isMessageToSupportTeamActive,
+		toggleMessageToSupportTeamActive,
+		messageToSupportTeam,
+		onMessageToSupportTeamChange,
+		onMessageToSupportTeamDeFocus,
 	} = useConfigNode({
 		rootId,
 	});
@@ -120,6 +125,27 @@ const ConfigNode = (props: Props) => {
 						onBlur={onCategoryIdDeFocus}
 						// readOnly={isRoot}
 						placeholder="Category ID"
+						className="mt-2"
+					/>
+				)}
+
+				<div className="flex items-center mt-5">
+					<p className="text-base text-primary-light mr-2">
+						Message to Support Team
+					</p>
+					<Switch
+						onCheckedChange={toggleMessageToSupportTeamActive}
+						checked={isMessageToSupportTeamActive}
+					/>
+				</div>
+
+				{isMessageToSupportTeamActive && (
+					<TextareaInput
+						value={messageToSupportTeam}
+						onChange={onMessageToSupportTeamChange}
+						onBlur={onMessageToSupportTeamDeFocus}
+						// readOnly={isRoot}
+						placeholder="Message To Support Team"
 						className="mt-2"
 					/>
 				)}
